@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookmarks</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Your Bookmarks</h1>
+    
+
+<div style="float: right;">
+
+    <!-- Logout Button -->
+    <a href="/logout">Logout</a><br>
+</div>
+
+
+   <div>
+    <!-- Add Bookmark Form -->
+    <form action="/bookmarks" method="POST">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="url" name="url" placeholder="URL" required>
+        <button type="submit">Add Bookmark</button>
+    </form>
+   </div>
+
+
+
+<div style="float: right;">
+     <!-- Search Bookmarks -->
+    <h2>Search Bookmarks</h2>
+    <input type="text" id="searchInput" placeholder="Search by title or URL">
+    <ul id="searchResults"></ul>
+</div>
+
+   
+
+
+<div style="padding-top: 25px;">
+    <!-- Display Bookmarks -->
+    
+    <h2>List of bookmarks</h2>
+    <ul>
+        <% bookmarks.forEach(function(bookmark) { %>
+            <li>
+                <a href="<%= bookmark.url %>"><%= bookmark.title %></a><br>
+                <span>Added: <%= new Date(bookmark.createdAt).toLocaleString() %></span>
+                <form action="/bookmarks/delete/<%= bookmark._id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="/bookmarks/edit/<%= bookmark._id %>">Edit</a>
+            </li>
+            <% }); %>
+        </body>
+        </html>
